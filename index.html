@@ -4,7 +4,7 @@
     <script>
         window.onload = function () {
             let display = document.getElementById("display");
-
+            
             let frames = [];
             let currentFrame = -1;
 
@@ -22,7 +22,7 @@
 
             let url = "squid2.json";
             frames = fetch(url)
-                .then(res => res.json())
+                .then(res => frames = res.json())
                 .then(() => setInterval(() => requestAnimationFrame(render), 1000.0 / 15));
         }
     </script>
