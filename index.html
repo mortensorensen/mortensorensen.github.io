@@ -1,3 +1,33 @@
----
-layout: default
----
+<html>
+
+<head>
+    <script>
+        window.onload = function () {
+            let display = document.getElementById("display");
+
+            let url = "squid2.json";
+            let frames = fetch(url).then(res => res.json()).then(out => JSON.parse(out));
+            let currentFrame = -1;
+            
+            let render = function () {
+                if (frames.length == 0) {
+                    display.innerHTML = "{image}";
+                } else {
+                    currentFrame += 1;
+                    if (currentFrame >= frames.length) {
+                        currentFrame = 0;
+                    }
+                    display.innerHTML = frames[currentFrame];
+                }
+            }
+            
+            setInterval(() => requestAnimationFrame(render), 1000.0 / 15);
+        }
+    </script>
+</head>
+
+<body style="background-color: #000000; color: #FFFFFF; font: bold 15px 'Courier New'">
+    <pre id="display"></pre>
+</body>
+
+</html>
