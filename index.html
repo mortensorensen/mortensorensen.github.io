@@ -5,10 +5,9 @@
         window.onload = function () {
             let display = document.getElementById("display");
 
-            let url = "squid2.json";
-            let frames = fetch(url).then(res => res.json());
+            let frames = [];
             let currentFrame = -1;
-            
+
             let render = function () {
                 if (frames.length == 0) {
                     display.innerHTML = "{image}";
@@ -20,8 +19,11 @@
                     display.innerHTML = frames[currentFrame];
                 }
             }
-            
-            setInterval(() => requestAnimationFrame(render), 1000.0 / 15);
+
+            let url = "squid2.json";
+            frames = fetch(url)
+                .then(res => res.json())
+                .then(() => setInterval(() => requestAnimationFrame(render), 1000.0 / 15));
         }
     </script>
 </head>
