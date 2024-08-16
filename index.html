@@ -6,7 +6,7 @@
             let display = document.getElementById("display");
 
             let url = "squid2.json";
-            let frames = fetch(url).then(res => res.json()).then(out => JSON.parse(out));
+            let frames = fetch(url).then(res => res.json());
             let currentFrame = -1;
             
             let render = function () {
