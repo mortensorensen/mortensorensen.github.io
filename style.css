@@ -1,0 +1,197 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  overflow: hidden;
+  font-family: "Courier New", monospace;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#main-canvas {
+  z-index: 1;
+}
+
+#ui-canvas {
+  z-index: 10;
+  pointer-events: none;
+}
+
+#overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 100;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.title {
+  font-size: clamp(2rem, 8vw, 6rem);
+  font-weight: 100;
+  letter-spacing: 0.5em;
+  background: linear-gradient(135deg, #00f5ff, #ff00ff, #00ff88, #ffff00);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 8s ease infinite;
+  filter: drop-shadow(0 0 30px rgba(0, 245, 255, 0.8));
+}
+
+.subtitle {
+  margin-top: 1rem;
+  font-size: clamp(0.6rem, 2vw, 1rem);
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.8em;
+  text-transform: uppercase;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 1s ease;
+}
+
+#loading.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-text {
+  color: #00f5ff;
+  font-size: 1rem;
+  letter-spacing: 0.5em;
+  margin-top: 30px;
+}
+
+.loading-bar {
+  width: 200px;
+  height: 2px;
+  background: rgba(0, 245, 255, 0.2);
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.loading-bar::after {
+  content: "";
+  display: block;
+  width: 50%;
+  height: 100%;
+  background: #00f5ff;
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+.matrix-footer {
+  position: fixed;
+  bottom: 14px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  font-family: "Courier New", monospace;
+  text-transform: uppercase;
+  color: rgba(0, 245, 255, 0.35);
+  z-index: 1200;
+  pointer-events: auto;
+  opacity: 0.6;
+  transition: opacity 0.4s ease;
+  mix-blend-mode: screen;
+}
+
+.matrix-footer:hover {
+  opacity: 1;
+}
+
+.matrix-footer .mf-label {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.matrix-footer .mf-name {
+  color: rgba(0, 245, 255, 0.9);
+  text-shadow: 0 0 6px rgba(0, 245, 255, 0.6), 0 0 14px rgba(0, 245, 255, 0.3);
+}
+
+.matrix-footer .mf-sep {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.matrix-footer a {
+  color: rgba(255, 0, 255, 0.65);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.matrix-footer a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #00f5ff, #ff00ff);
+  transition: width 0.4s ease;
+}
+
+.matrix-footer a:hover {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+}
+
+.matrix-footer a:hover::after {
+  width: 100%;
+}

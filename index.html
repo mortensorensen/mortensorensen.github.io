@@ -1,35 +1,21 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>morten.lol</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<head>
-    <script>
-        window.onload = function () {
-            let display = document.getElementById("display");
-            
-            let frames = [];
-            let currentFrame = -1;
+  <body>
+    <div id="loading">
+      <div class="loading-bar"></div>
+    </div>
 
-            let render = function () {
-                if (frames.length == 0) {
-                    display.innerHTML = "{image}";
-                } else {
-                    currentFrame += 1;
-                    if (currentFrame >= frames.length) {
-                        currentFrame = 0;
-                    }
-                    display.innerHTML = frames[currentFrame];
-                }
-            }
+    <canvas id="main-canvas"></canvas>
+    <canvas id="ui-canvas"></canvas>
 
-            let url = "squid2.json";
-            frames = fetch(url)
-                .then(res => frames = res.json())
-                .then(() => setInterval(() => requestAnimationFrame(render), 1000.0 / 15));
-        }
-    </script>
-</head>
-
-<body style="background-color: #000000; color: #FFFFFF; font: bold 15px 'Courier New'">
-    <pre id="display"></pre>
-</body>
-
+    <script src="./script.js"></script>
+  </body>
 </html>
